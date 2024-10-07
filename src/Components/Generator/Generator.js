@@ -1,11 +1,11 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import QRCode from "qrcode";
 
 export default function Generator() {
   const [text, setText] = useState("");
   const [qrCodeData, setQRCodeData] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(""); // State to hold the error message
+  const [error, setError] = useState("");
 
   const generateQRCode = async () => {
     try {
@@ -21,7 +21,7 @@ export default function Generator() {
       setError("Please enter text or URL to generate a QR code.");
       return;
     }
-    setError(""); // Clear the error if text is entered
+    setError(""); 
     generateQRCode();
     setSubmitted(true);
   };
@@ -30,7 +30,7 @@ export default function Generator() {
     setText('');
     setQRCodeData('');
     setSubmitted(false);
-    setError(""); // Clear the error message when clearing
+    setError("");
   };
 
   return (
@@ -60,11 +60,18 @@ export default function Generator() {
             {qrCodeData && (
               <div className="bg-white p-4 rounded-lg shadow-lg">
                 <img src={qrCodeData} alt="qr-code" />
+                <a
+                  href={qrCodeData}
+                  download="qrcode.png"
+                  className="mt-4 text-center text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Download QR Code
+                </a>
               </div>
             )}
           </div>
           <div>
-            {submitted ?  (
+            {submitted ? (
               <button
                 type="button"
                 className="group relative w-full flex justify-center py-2 px-4 border border-[#2d8f87] text-sm font-medium rounded-md text-white hover:border-[#f1faff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
